@@ -1,6 +1,6 @@
 import 'package:comum/services/config_service.dart';
 import 'package:estou_entregando/app/routing.dart';
-import 'package:estou_entregando/app/view/procurar.dart';
+//import 'package:estou_entregando/app/view/procurar.dart';
 import 'package:flutter/material.dart';
 import 'config/config.dart';
 import 'package:get/get.dart';

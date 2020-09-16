@@ -142,9 +142,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   get isComponentOnly => widget.isComponentOnly || (texto != null);
-  EntradaView buildEntradaView() {
+  Widget buildEntradaView() {
     var x = texto;
     texto = null;
+    if (x != null)
+      return StreamBuilder(
+          stream: LogouCloudV3().stream,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData)
+              return Align(child: CircularProgressIndicator());
+            return ProcurarLojaView(
+              isComponentOnly: isComponentOnly,
+              por: x,
+              tokenAlteracao: ConfigApp().tokenAlteracao,
+            );
+          });
     return EntradaView(
       isComponentOnly: isComponentOnly,
       por: x,
@@ -156,11 +168,10 @@ class _HomePageState extends State<HomePage> {
             context,
             //width: size.width,
             //height: size.height,
-            duration: 0,
+            //duration: 0,
             fullPage: true,
             child: ProcurarLojaView(
               isComponentOnly: isComponentOnly,
-              por: x,
               tokenAlteracao: ConfigApp().tokenAlteracao,
             ),
           );
