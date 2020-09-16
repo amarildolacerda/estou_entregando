@@ -139,14 +139,10 @@ class _ProcurarLojaViewState extends State<ProcurarLojaView>
       procurar('', x);
     });
     print('initState procurar ok');
-//    loginChanged = LoginTokenChanged().stream.listen((x) {
-//      sendCidadeList();
-//    });
     pesquisando = false;
     procurando = BlocModel<bool>();
     cidadeNode = FocusNode();
-    //controllerAnimateIcon = AnimationController(
-    //    duration: const Duration(milliseconds: 500), vsync: this);
+
     limparBloc = LimpaProcurarBloc().stream.listen((x) {
       _cidadeController.text = '';
       _porController.text = '';
@@ -157,10 +153,12 @@ class _ProcurarLojaViewState extends State<ProcurarLojaView>
 
     if (widget.por != null) {
       _porController.text = widget.por;
-      //BuscarPalavra().notify(widget.por);
-      _porController.text = widget.por;
+      buscarPalavra = widget.por;
+    }
+
+    if (buscarPalavra != null) {
       Timer.run(() {
-        procurar('', widget.por);
+        BuscarPalavra().notify(buscarPalavra);
       });
     }
 
@@ -174,44 +172,10 @@ class _ProcurarLojaViewState extends State<ProcurarLojaView>
     procurando.dispose();
     limparBloc.cancel();
     reloadBusca.cancel();
-//    loginChanged.cancel();
     buscarPor.cancel();
     super.dispose();
   }
 
-/*
-  sendCidadeList() async {
-    return EstouEntregandoModel().cidadesList().then((x) {
-      print(x.runtimeType);
-      List<dynamic> result = x['result'];
-      print(result);
-      cidadesList = [];
-      result.forEach((v) {
-        var k = v['t'];
-        if (cidadesList.indexOf(k) < 0) cidadesList.add(k);
-      });
-      cidadesChegou.notify(true);
-      return cidadesList;
-    });
-  }
-*/
-
-/*
-  List<String> palavrasList = [];
-  BlocModel<bool> palavrasChegou = BlocModel<bool>();
-
-  sendPalavrasList(String cidade) async {
-    if ((cidade ?? '').length == 0) return;
-    EstouEntregandoModel().palavrasList(cidade).then((x) {
-      List<dynamic> result = x['result'];
-      result.forEach((v) {
-        var k = v['t'];
-        if (palavrasList.indexOf(k) < 0) palavrasList.add(k);
-      });
-      palavrasChegou.notify(true);
-    });
-  }
-*/
   Size size;
 
   estaPesquisando() {
@@ -219,27 +183,18 @@ class _ProcurarLojaViewState extends State<ProcurarLojaView>
         (_porController.text != '');
   }
 
-  //ResponsiveInfo responsive;
   @override
   Widget build(BuildContext context) {
-    // responsive = ResponsiveInfo(context);
-
     size = MediaQuery.of(context).size;
     var w = size.boxWidth(max: 300) * 0.95;
 
-    if (buscarPalavra != null) {
-      Timer.run(() {
-        BuscarPalavra().notify(buscarPalavra);
-      });
-    }
-
-    //sendPalavrasList(_cidadeController.text);
     return SliverContents(
-      appBar: (widget.isComponentOnly)
-          ? AppBar(title: Text('Estabelecimentos'))
-          : AppBar(
-              flexibleSpace: GestureDetector(child: buildProcurar()),
-            ),
+      appBar: //(widget.isComponentOnly)
+          //? AppBar(title: Text('Estabelecimentos'))
+          //:
+          AppBar(
+        flexibleSpace: GestureDetector(child: buildProcurar()),
+      ),
       body: StreamBuilder<List<dynamic>>(
           stream: ProcurarPor().stream,
           builder: (context, snapshot) {
@@ -655,30 +610,33 @@ class ContainerDesafio extends StatelessWidget {
             .getDoc('lojas/$loja/entregandoConfig', loja),
         builder: (context, x) {
           if (!x.hasData) return Container();
-          return Container(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 100, right: 100),
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Text(x.data['desafio0'],
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(x.data['desafio1']),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(x.data['desafio2']),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(x.data['desafio3'])
-                ],
+          return DefaultTextStyle(
+            style: TextStyle(fontSize: 14, color: Colors.black),
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 100, right: 100),
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Text(x.data['desafio0'],
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(x.data['desafio1']),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(x.data['desafio2']),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(x.data['desafio3'])
+                  ],
+                ),
               ),
             ),
           );
