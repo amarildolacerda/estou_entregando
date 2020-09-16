@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description"
+      content="'Storeware Estou Entregando' Aplicativo para compartilhar lojistas que estão entregando em casa durante a quarentena e final de semana">
+
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Estou Entregando">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+
+    <title>Estou entregando</title>
+    <link rel="manifest" href="manifest.json">
+
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-storage.js"></script>
+    <style>
+      body {
+        background-image: url("https://wbagestao.com/w3/resources/estou_entregando.png");
+        background-size: 200px;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+    </style>
+
+  </head>
+
+  <body onload="loaded();">
+    <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+    <script>
+      // counter é usao pelo iframe para block reload 
+      //var counter = 0;
+
+      const options = {
+        apiKey: "AIzaSyAV0c4MPfug-hSJYU8bT5pADkpaUadCYGU",
+        authDomain: "selfandpay.firebaseapp.com",
+        databaseURL: "https://selfandpay.firebaseio.com",
+        projectId: "selfandpay",
+        storageBucket: "selfandpay.appspot.com",
+        messagingSenderId: "858174338114",
+        appId: "1:858174338114:web:1f7773702de59dc336e9db",
+        measurementId: "G-G1ZWS0D01G"
+      };
+      firebase.initializeApp( options );
+
+      if ( 'serviceWorker' in navigator ) {
+        window.addEventListener( 'load', function () {
+          navigator.serviceWorker.register( 'flutter_service_worker.js' );
+        } );
+      }
+
+      function frameLoad( frm, name, src ) {
+        console.log( 'carregando iframe' );
+        console.log( name, src, 'carregando' );
+        // if ( window.frames[ 0 ] ) {
+        //var frm = document.getElementById( 'myframe' );
+        console.log( frm );
+        if ( frm ) {
+          frm.contentWindow.document.location.href = src;
+          console.log( 'carregou' );
+          //frm.setAttribute( 'onload', '' );
+        }
+
+      }
+      function loaded() {
+        console.log( 'loaded call' );
+      }
+
+    </script>
+    <script src="main.dart.js" type="application/javascript"></script>
+  </body>
+
+</html>

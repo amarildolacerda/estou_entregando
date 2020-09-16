@@ -1,0 +1,95 @@
+name: estou_entregando
+description: "Storeware - Estou Entregando"
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+2
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  dio: ^3.0.9
+  #equatable: ^1.1.1
+  #bloc_test: ^4.0.0
+  #bloc: ^3.0.0
+  #  provider:
+  #flutter_typeahead: ^1.8.0
+  flutter:
+    sdk: flutter
+  url_launcher: 5.4.2
+  #toast: ^0.1.5
+  uuid:
+  #firebase_core:
+  #firebase_storage:
+  #firebase_auth:
+  get: ^3.5.1
+
+  controls_web:
+    git:
+      url: https://github.com/amarildolacerda/flutter_dart.git
+      path: controls_web
+
+  controls_data:
+    git:
+      url: https://github.com/amarildolacerda/flutter_dart.git
+      path: controls_data
+  controls_firebase:
+    git:
+      url: https://github.com/amarildolacerda/flutter_dart.git
+      path: controls_firebase
+  controls_extensions:
+    git:
+      url: https://github.com/amarildolacerda/flutter_dart.git
+      path: controls_extensions
+
+  #easy_web_view:
+  #  ^1.3.0
+  html_container:
+    git:
+      url: https://github.com/amarildolacerda/flutter_dart.git
+      path: html_container
+  #webview_flutter:
+
+  comum:
+    git:
+      url: https://github.com/amarildolacerda/flutter_comum.git
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+
+dev_dependencies:
+  mockito: ^4.1.1
+  flutter_test:
+    sdk: flutter
+
+  #https://medium.com/@LohaniDamodar/prepare-your-flutter-app-to-publish-to-google-play-store-easiest-way-fb2efbff8b22
+  flutter_automation:
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  fonts:
+    #    - family: Pacifico
+    #      fonts:
+    #        - asset: assets/fonts/Pacifico-Regular.ttf
+    - family: WorkSans
+      fonts:
+        - asset: assets/fonts/WorkSans-Regular.ttf
+  assets:
+    - assets/estou_entregando.png
+#keytool -genkey -v -dname estouentregando -validity 10000 -alias estouentregando -keystore keys/keystore.jks -dname "cn=estouentregando.com,  o=company, c=br"
